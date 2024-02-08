@@ -1,6 +1,7 @@
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 
@@ -15,10 +16,30 @@ import javax.swing.JPanel;
  */
 public class MazePanel extends JPanel{
     private BufferedImage image;
+    private Point entrance;
+    private Point exit;
     
     public MazePanel() {
-        image = new BufferedImage(305, 205, BufferedImage.TYPE_INT_RGB);
+        image = new BufferedImage(200, 100, BufferedImage.TYPE_INT_RGB);
         clear();
+        entrance = null;
+        exit = null;
+    }
+    
+    public void setEntranceAndExit() {
+        int x = (int)(Math.random() * image.getWidth() / 2 - 1);
+        x = 2 * x + 1;
+        int y = (int)(Math.random() * image.getHeight() / 2 - 1);
+        y = 2 * y + 1;
+        entrance = new Point(x, y);
+        x = (int)(Math.random() * image.getWidth() / 2 - 1);
+        x = 2 * x + 1;
+        y = (int)(Math.random() * image.getHeight() / 2 - 1);
+        y = 2 * y + 1;
+        exit = new Point (x, y);
+        image.setRGB(entrance.x, entrance.y, Color.GREEN.getRGB());
+        image.setRGB(exit.x, exit.y, Color.BLUE.getRGB());
+        
     }
     
     @Override
@@ -36,6 +57,7 @@ public class MazePanel extends JPanel{
     public void drawMaze() {
         clear();
         MazeMaker.makeMaze(image);
+        setEntranceAndExit();
         repaint();
     }
 }

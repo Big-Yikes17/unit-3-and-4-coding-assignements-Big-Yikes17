@@ -15,9 +15,9 @@ import java.util.ArrayList;
 public class MazeMaker {
     public static void makeMaze(BufferedImage image) {
         ArrayList<Point> cells = new ArrayList<>();
-        int x = (int)(Math.random() * image.getWidth() / 2);
+        int x = (int)(Math.random() * (image.getWidth() / 2 - 1));
         x = 2 * x + 1;
-        int y = (int)(Math.random() * image.getHeight() / 2);
+        int y = (int)(Math.random() * (image.getHeight() / 2 - 1));
         y = 2 * y + 1;
         Point cell = new Point(x, y);
         cells.add(cell);
@@ -48,7 +48,7 @@ public class MazeMaker {
                 neighbors.add(new Point(cell.x, cell.y - 2));
             }
         }
-         if (cell.y < image.getHeight() - 3) {
+        if (cell.y < image.getHeight() - 3) {
             int color = image.getRGB(cell.x, cell.y + 2);
             if (color == Color.BLACK.getRGB()) {
                 neighbors.add(new Point(cell.x, cell.y + 2));
