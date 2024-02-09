@@ -27,6 +27,9 @@ public class MazeGUI extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         generateMazeButton = new javax.swing.JButton();
+        solveMazeButton = new javax.swing.JButton();
+        algorithmComboBox = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
         mazePanel1 = new MazePanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -38,24 +41,55 @@ public class MazeGUI extends javax.swing.JFrame {
             }
         });
 
+        solveMazeButton.setText("Solve Maze");
+        solveMazeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                solveMazeButtonActionPerformed(evt);
+            }
+        });
+
+        algorithmComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Random Mouse" }));
+        algorithmComboBox.setToolTipText("");
+        algorithmComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                algorithmComboBoxActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Algorithm");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(generateMazeButton, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(algorithmComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(generateMazeButton, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                    .addComponent(solveMazeButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 515, Short.MAX_VALUE)
-                .addComponent(generateMazeButton))
+                .addGap(4, 4, 4)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(algorithmComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 425, Short.MAX_VALUE)
+                .addComponent(solveMazeButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(generateMazeButton)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout mazePanel1Layout = new javax.swing.GroupLayout(mazePanel1);
         mazePanel1.setLayout(mazePanel1Layout);
         mazePanel1Layout.setHorizontalGroup(
             mazePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 656, Short.MAX_VALUE)
+            .addGap(0, 655, Short.MAX_VALUE)
         );
         mazePanel1Layout.setVerticalGroup(
             mazePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -89,6 +123,15 @@ public class MazeGUI extends javax.swing.JFrame {
     private void generateMazeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateMazeButtonActionPerformed
         mazePanel1.drawMaze();
     }//GEN-LAST:event_generateMazeButtonActionPerformed
+
+    private void algorithmComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_algorithmComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_algorithmComboBoxActionPerformed
+
+    private void solveMazeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solveMazeButtonActionPerformed
+        int algorithm = algorithmComboBox.getSelectedIndex();
+        mazePanel1.startSolving(algorithm) ;
+    }//GEN-LAST:event_solveMazeButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -126,8 +169,11 @@ public class MazeGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> algorithmComboBox;
     private javax.swing.JButton generateMazeButton;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private MazePanel mazePanel1;
+    private javax.swing.JButton solveMazeButton;
     // End of variables declaration//GEN-END:variables
 }

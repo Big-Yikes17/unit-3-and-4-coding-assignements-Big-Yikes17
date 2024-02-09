@@ -35,7 +35,6 @@ public class MazeMaker {
                 int midX = (nextCell.x + cell.x) / 2;
                 int midY = (nextCell.y + cell.y) / 2;
                 image.setRGB(midX, midY, Color.WHITE.getRGB());
-                cell = nextCell;
             }
         }
     }

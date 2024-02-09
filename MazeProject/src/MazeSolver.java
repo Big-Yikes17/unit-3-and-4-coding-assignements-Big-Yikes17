@@ -2,6 +2,7 @@
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -21,6 +22,44 @@ public class MazeSolver {
         position = startPos;
         this.maze = maze;
         direction = new Point(1, 0);        
+    }
+    
+    public Point getPosition() {
+        return position;
+    }
+    
+    public Point solveRandom() {
+        ArrayList<String> directions = new ArrayList<>();
+        if ( canMoveForward()) {
+            directions.add("forward");
+        }
+        if (canMoveRight()) {
+            directions.add("right");
+        }
+        if (canMoveLeft()) {
+            directions.add("left");
+        }
+        if (directions.size() == 0) {
+            turnRight();
+            turnRight();
+            moveForward();
+            return position;
+        }
+        int i = (int)(Math.random() * directions.size());
+        String choice = directions.get(i);
+        if(choice.equals("forward")) {
+            moveForward();
+            return position;
+        } else if (choice.equals("right")) {
+            turnRight();
+            moveForward();
+            return position;
+        } else {
+            turnLeft();
+            moveForward();
+            return position;
+        }
+        
     }
     
     private boolean canMoveForward() {

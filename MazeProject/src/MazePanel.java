@@ -31,7 +31,7 @@ public class MazePanel extends JPanel{
         entrance = null;
         exit = null;
         solver = null;
-        timer = new Timer(200, new ActionListener() {
+        timer = new Timer(20, new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 doNextSolveStep();
             }
