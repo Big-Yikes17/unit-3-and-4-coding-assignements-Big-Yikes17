@@ -2,8 +2,11 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -18,12 +21,26 @@ public class MazePanel extends JPanel{
     private BufferedImage image;
     private Point entrance;
     private Point exit;
+    private MazeSolver solver;
+    private Timer timer;
+    private int algorithm;
     
     public MazePanel() {
-        image = new BufferedImage(200, 100, BufferedImage.TYPE_INT_RGB);
+        image = new BufferedImage(201, 101, BufferedImage.TYPE_INT_RGB);
         clear();
         entrance = null;
         exit = null;
+        solver = null;
+        timer = new Timer(200, new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                doNextSolveStep();
+            }
+        });
+    }
+    
+    public void startSolving(int algorithm) {
+        this.algorithm = algorithm;
+        timer.start();
     }
     
     public void setEntranceAndExit() {
@@ -39,7 +56,18 @@ public class MazePanel extends JPanel{
         exit = new Point (x, y);
         image.setRGB(entrance.x, entrance.y, Color.GREEN.getRGB());
         image.setRGB(exit.x, exit.y, Color.BLUE.getRGB());
-        
+        solver = new MazeSolver(entrance, image);
+    }
+    
+    public void doNextSolveStep() {
+        Point oldPosition = solver.getPosition();
+        image.setRGB(oldPosition.x, oldPosition.y, Color.PINK.getRGB());
+        if (algorithm == 0) {
+            solver.solveRandom();
+        }
+        Point newPosition = solver.getPosition();
+        image.setRGB(oldPosition.x, oldPosition.y, Color.RED.getRGB());
+        repaint();
     }
     
     @Override
