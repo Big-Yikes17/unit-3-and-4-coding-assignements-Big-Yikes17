@@ -30,6 +30,8 @@ public class MazeGUI extends javax.swing.JFrame {
         solveMazeButton = new javax.swing.JButton();
         algorithmComboBox = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
+        speedSlider = new javax.swing.JSlider();
+        jLabel2 = new javax.swing.JLabel();
         mazePanel1 = new MazePanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -48,7 +50,7 @@ public class MazeGUI extends javax.swing.JFrame {
             }
         });
 
-        algorithmComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Random Mouse" }));
+        algorithmComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Random Mouse", "Wall Follower Right", "Wall Follower Left" }));
         algorithmComboBox.setToolTipText("");
         algorithmComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -57,6 +59,16 @@ public class MazeGUI extends javax.swing.JFrame {
         });
 
         jLabel1.setText("Algorithm");
+
+        speedSlider.setMaximum(6);
+        speedSlider.setValue(0);
+        speedSlider.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                speedSliderStateChanged(evt);
+            }
+        });
+
+        jLabel2.setText("Set Speed");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -67,9 +79,14 @@ public class MazeGUI extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(generateMazeButton, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                    .addComponent(generateMazeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(solveMazeButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(speedSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -78,7 +95,11 @@ public class MazeGUI extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(algorithmComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 425, Short.MAX_VALUE)
+                .addGap(31, 31, 31)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(speedSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 357, Short.MAX_VALUE)
                 .addComponent(solveMazeButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(generateMazeButton)
@@ -89,7 +110,7 @@ public class MazeGUI extends javax.swing.JFrame {
         mazePanel1.setLayout(mazePanel1Layout);
         mazePanel1Layout.setHorizontalGroup(
             mazePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 655, Short.MAX_VALUE)
+            .addGap(0, 628, Short.MAX_VALUE)
         );
         mazePanel1Layout.setVerticalGroup(
             mazePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,6 +154,11 @@ public class MazeGUI extends javax.swing.JFrame {
         mazePanel1.startSolving(algorithm) ;
     }//GEN-LAST:event_solveMazeButtonActionPerformed
 
+    private void speedSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_speedSliderStateChanged
+        int speed = speedSlider.getValue();
+        mazePanel1.setSpeed(speed);
+    }//GEN-LAST:event_speedSliderStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -172,8 +198,10 @@ public class MazeGUI extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> algorithmComboBox;
     private javax.swing.JButton generateMazeButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private MazePanel mazePanel1;
     private javax.swing.JButton solveMazeButton;
+    private javax.swing.JSlider speedSlider;
     // End of variables declaration//GEN-END:variables
 }

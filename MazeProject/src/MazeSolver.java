@@ -28,6 +28,34 @@ public class MazeSolver {
         return position;
     }
     
+    public Point solveWallFollowLeft() {
+        if (canMoveRight()) {
+            turnRight();
+            moveForward();
+            return position;
+        }
+        if (canMoveForward()) {
+            moveForward();
+            return position;
+        }
+        turnLeft();
+        return position;
+    }
+    
+    public Point solveWallFollowRight() {
+        if (canMoveLeft()) {
+            turnLeft();
+            moveForward();
+            return position;
+        }
+        if (canMoveForward()) {
+            moveForward();
+            return position;
+        }
+        turnRight();
+        return position;
+    }
+    
     public Point solveRandom() {
         ArrayList<String> directions = new ArrayList<>();
         if ( canMoveForward()) {

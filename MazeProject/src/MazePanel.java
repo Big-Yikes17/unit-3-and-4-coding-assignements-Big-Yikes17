@@ -5,6 +5,7 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -24,18 +25,23 @@ public class MazePanel extends JPanel{
     private MazeSolver solver;
     private Timer timer;
     private int algorithm;
+    private int iterationCount;
     
     public MazePanel() {
-        image = new BufferedImage(201, 101, BufferedImage.TYPE_INT_RGB);
+        image = new BufferedImage(10001, 9991, BufferedImage.TYPE_INT_RGB);
         clear();
         entrance = null;
         exit = null;
         solver = null;
-        timer = new Timer(20, new ActionListener() {
+        timer = new Timer(50, new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 doNextSolveStep();
             }
         });
+    }
+    
+    public void setSpeed(int speed) {
+        timer.setDelay((int)(256/ Math.pow(2, speed)));
     }
     
     public void startSolving(int algorithm) {
@@ -60,12 +66,23 @@ public class MazePanel extends JPanel{
     }
     
     public void doNextSolveStep() {
+        iterationCount++;
         Point oldPosition = solver.getPosition();
         image.setRGB(oldPosition.x, oldPosition.y, Color.PINK.getRGB());
         if (algorithm == 0) {
             solver.solveRandom();
+        } else if (algorithm == 1) {
+            solver.solveWallFollowRight();
+        } else if (algorithm == 2) {
+            solver.solveWallFollowLeft();
         }
         Point newPosition = solver.getPosition();
+        int color = image.getRGB(newPosition.x, newPosition.y);
+        if(color == Color.BLUE.getRGB()) {
+            timer.stop();
+            JOptionPane.showMessageDialog(this, "Maze has been Solved in" + iterationCount + " steps!");
+            
+        }
         image.setRGB(oldPosition.x, oldPosition.y, Color.RED.getRGB());
         repaint();
     }
