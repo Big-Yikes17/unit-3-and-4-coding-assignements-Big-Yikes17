@@ -28,7 +28,7 @@ public class MazePanel extends JPanel{
     private int iterationCount;
     
     public MazePanel() {
-        image = new BufferedImage(10001, 9991, BufferedImage.TYPE_INT_RGB);
+        image = new BufferedImage(201, 101, BufferedImage.TYPE_INT_RGB);
         clear();
         entrance = null;
         exit = null;
