@@ -28,7 +28,7 @@ public class MazePanel extends JPanel{
     private int iterationCount;
     
     public MazePanel() {
-        image = new BufferedImage(201, 101, BufferedImage.TYPE_INT_RGB);
+        image = new BufferedImage(101, 51, BufferedImage.TYPE_INT_RGB);
         clear();
         entrance = null;
         exit = null;
@@ -75,6 +75,8 @@ public class MazePanel extends JPanel{
             solver.solveWallFollowRight();
         } else if (algorithm == 2) {
             solver.solveWallFollowLeft();
+        } else if (algorithm == 3) {
+            solver.solvePledge();
         }
         Point newPosition = solver.getPosition();
         int color = image.getRGB(newPosition.x, newPosition.y);
@@ -103,6 +105,11 @@ public class MazePanel extends JPanel{
         clear();
         MazeMaker.makeMaze(image);
         setEntranceAndExit();
+        repaint();
+    }
+    public void removeWalls() {
+        int n = (int)(image.getWidth() * image.getHeight() * 0.02);
+        MazeMaker.removeWalls(image, n);
         repaint();
     }
 }

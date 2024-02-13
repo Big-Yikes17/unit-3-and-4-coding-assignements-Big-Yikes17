@@ -67,4 +67,15 @@ public class MazeMaker {
         } 
         return neighbors;
     }
+    
+    public static void removeWalls(BufferedImage maze, int n) {
+        for(int i = 0; i < n; i++) {
+            int x = (int)(Math.random()* (maze.getWidth() / 2) - 2) +  2;
+            x *= 2;
+            int y = (int)(Math.random() * (maze.getHeight() / 2) - 2) + 2;
+            y *= 2;
+            maze.setRGB(x, y, Color.WHITE.getRGB());
+        }
+    }
+            
 }

@@ -103,11 +103,11 @@ public class MazeSolver {
     }
         
     private void turnRight() {
-            direction.move(direction .y, -1 * direction.x);
+            direction.move(-1 * direction .y, direction.x);
     }
         
     private void turnLeft() {
-        direction.move(-1 * direction.y, direction.x);
+        direction.move(direction.y, -1 * direction.x);
     }
     
     private boolean canMoveRight() {
