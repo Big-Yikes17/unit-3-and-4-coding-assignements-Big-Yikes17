@@ -17,18 +17,20 @@ public class MazeSolver {
     private Point position;
     private Point direction;
     private BufferedImage maze;
+    private int turnCount;
     
     public MazeSolver(Point startPos, BufferedImage maze) {
         position = startPos;
         this.maze = maze;
-        direction = new Point(1, 0);        
+        direction = new Point(1, 0);   
+        turnCount = 0;
     }
     
     public Point getPosition() {
         return position;
     }
     
-    public Point solveWallFollowLeft() {
+    public Point solveWallFollowRight() {
         if (canMoveRight()) {
             turnRight();
             moveForward();
@@ -42,7 +44,7 @@ public class MazeSolver {
         return position;
     }
     
-    public Point solveWallFollowRight() {
+    public Point solveWallFollowLeft() {
         if (canMoveLeft()) {
             turnLeft();
             moveForward();
@@ -90,10 +92,32 @@ public class MazeSolver {
         
     }
     
+    public Point solvePledge() {
+        if (turnCount == 0) {
+            moveForward();
+            turnRight();
+            turnCount++;
+            return position;
+        }else if (canMoveForward()) {
+            moveForward();
+            return position;
+        
+        } else if (canMoveRight()) {
+            turnRight();
+            turnCount++;
+            if(canMoveForward()) {
+                solveWallFollowRight();
+                return position;
+            }
+            return position;
+        }
+        return position;
+    }
+    
     private boolean canMoveForward() {
         Point forward = new Point(position.x + direction.x, position.y + direction.y);
         int color = maze.getRGB(forward.x, forward. y);
-        return color != Color.BLACK.getRGB() ;
+        return color != Color.BLACK.getRGB();
     }
     
     private void moveForward() {

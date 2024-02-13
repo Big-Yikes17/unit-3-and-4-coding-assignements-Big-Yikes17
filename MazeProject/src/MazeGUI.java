@@ -51,7 +51,7 @@ public class MazeGUI extends javax.swing.JFrame {
             }
         });
 
-        algorithmComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Random Mouse", "Wall Follower Right", "Wall Follower Left" }));
+        algorithmComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Random Mouse", "Wall Follower Right", "Wall Follower Left", "Pledge" }));
         algorithmComboBox.setToolTipText("");
         algorithmComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
