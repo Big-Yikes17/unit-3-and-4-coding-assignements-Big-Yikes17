@@ -55,10 +55,29 @@ public class MazePanel extends JPanel{
         int y = (int)(Math.random() * image.getHeight() / 2 - 1);
         y = 2 * y + 1;
         entrance = new Point(x, y);
-        x = (int)(Math.random() * image.getWidth() / 2 - 1);
-        x = 2 * x + 1;
-        y = (int)(Math.random() * image.getHeight() / 2 - 1);
-        y = 2 * y + 1;
+        //x = (int)(Math.random() * image.getWidth() / 2 - 1);
+        //x = 2 * x + 1;
+        //y = (int)(Math.random() * image.getHeight() / 2 - 1);
+        //y = 2 * y + 1;
+        if ( Math.random() < 0.5) {
+            //exit on a vertical edge
+            if (Math.random() < 0.5) {
+                x = 1;
+            } else {
+                x = image.getWidth() - 2;
+            }
+            y = (int)(Math.random() * image.getHeight() / 2 - 1);
+            y = 2 * y + 1;
+        } else {
+            //exit on a horizontal edge
+            if (Math.random() < 0.5) {
+                y = 1;
+            } else {
+                y = image.getHeight() - 2;
+            }
+            x = (int)(Math.random() * image.getWidth() / 2 - 1);
+            x = 2 * x + 1;
+        }
         exit = new Point (x, y);
         image.setRGB(entrance.x, entrance.y, Color.GREEN.getRGB());
         image.setRGB(exit.x, exit.y, Color.BLUE.getRGB());
@@ -82,7 +101,7 @@ public class MazePanel extends JPanel{
         int color = image.getRGB(newPosition.x, newPosition.y);
         if(color == Color.BLUE.getRGB()) {
             timer.stop();
-            JOptionPane.showMessageDialog(this, "Maze has been Solved in" + iterationCount + " steps!");
+            JOptionPane.showMessageDialog(this, "Maze has been Solved in " + iterationCount + " steps!");
             
         }
         image.setRGB(oldPosition.x, oldPosition.y, Color.RED.getRGB());

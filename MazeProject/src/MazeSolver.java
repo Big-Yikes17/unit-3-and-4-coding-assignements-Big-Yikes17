@@ -33,6 +33,7 @@ public class MazeSolver {
     public Point solveWallFollowRight() {
         if (canMoveRight()) {
             turnRight();
+            turnCount++;
             moveForward();
             return position;
         }
@@ -41,6 +42,7 @@ public class MazeSolver {
             return position;
         }
         turnLeft();
+        turnCount--;
         return position;
     }
     
@@ -94,22 +96,17 @@ public class MazeSolver {
     
     public Point solvePledge() {
         if (turnCount == 0) {
-            moveForward();
-            turnRight();
-            turnCount++;
-            return position;
-        }else if (canMoveForward()) {
-            moveForward();
-            return position;
-        
-        } else if (canMoveRight()) {
-            turnRight();
-            turnCount++;
-            if(canMoveForward()) {
-                solveWallFollowRight();
+            if (canMoveForward()) {
+                moveForward();
+                return position;
+            } else {
+                turnLeft();
+                turnCount--;
                 return position;
             }
-            return position;
+        } else {
+            solveWallFollowRight();
+            
         }
         return position;
     }
